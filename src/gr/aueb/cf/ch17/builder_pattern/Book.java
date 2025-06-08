@@ -13,6 +13,15 @@ public class Book {
     }
 
     public static class Builder {
+        private final long id;
+        private  final String isbn;
+        private String author = "";
+        private String title = "";
+
+        public Builder(long id, String isbn){
+            this.id = id;
+            this.isbn = isbn;
+        }
 
     }
 }
