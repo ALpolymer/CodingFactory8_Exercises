@@ -28,4 +28,12 @@ public class LifoParking {
 
         return carId;
     }
+
+    public boolean isEmpty(){
+        return parking.isEmpty();
+    }
+
+    public void traverse(){
+        parking.forEach(System.out::println);
+    }
 }
