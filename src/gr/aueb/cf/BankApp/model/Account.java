@@ -2,6 +2,7 @@ package gr.aueb.cf.BankApp.model;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Objects;
 
 public class Account {
     private String iban;
@@ -30,5 +31,24 @@ public class Account {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "iban='" + iban + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Account account)) return false;
+        return Objects.equals(getIban(), account.getIban());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIban());
     }
 }
