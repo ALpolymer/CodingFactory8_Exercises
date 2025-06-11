@@ -15,6 +15,7 @@ public class AccountDAOImpl implements IAccountDAO{
 
         if(index != -1){
             accounts.set(index, account);
+            return;
         }
         accounts.add(account);
     }
