@@ -1,7 +1,6 @@
 package gr.aueb.cf.BankApp.model;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Objects;
 
 public class Account {

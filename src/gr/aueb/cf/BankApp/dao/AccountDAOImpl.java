@@ -11,6 +11,11 @@ public class AccountDAOImpl implements IAccountDAO{
 
     @Override
     public void saveOrUpdate(Account account) {
+        int index = accounts.indexOf(account);
+
+        if(index != -1){
+            accounts.set(index, account);
+        }
         accounts.add(account);
     }
 
