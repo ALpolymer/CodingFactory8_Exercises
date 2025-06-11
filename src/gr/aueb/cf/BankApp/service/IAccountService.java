@@ -13,6 +13,6 @@ public interface IAccountService {
     boolean createNewAccount(AccountInsertDTO dto);
     void deposit (String iban, BigDecimal amount) throws NegativeAmountException, AccountNotFoundException;
     void withdraw (String iban, BigDecimal amount) throws NegativeAmountException, AccountNotFoundException, InsufficientBalanceException;
-    BigDecimal getBalance(String iban);
+    BigDecimal getBalance(String iban) throws AccountNotFoundException;
     List<AccountReadOnlyDTO> getAccounts();
 }

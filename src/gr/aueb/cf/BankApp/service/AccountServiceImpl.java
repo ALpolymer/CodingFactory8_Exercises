@@ -11,7 +11,10 @@ import gr.aueb.cf.BankApp.model.Account;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements IAccountService{
     private final IAccountDAO accountDAO;
@@ -73,16 +76,29 @@ public class AccountServiceImpl implements IAccountService{
         } catch (AccountNotFoundException e){
             System.err.printf("%s The account with iban=%s not found. \n%s", LocalDateTime.now(), iban, e);
             throw e;
+        } catch (InsufficientBalanceException e){
+            System.err.printf("%s The amount=%f is greater than balance not found. \n%s", LocalDateTime.now(), amount, e);
+            throw e;
         }
     }
 
     @Override
-    public BigDecimal getBalance(String iban) {
-        return null;
+    public BigDecimal getBalance(String iban)  throws AccountNotFoundException {
+        try{
+            Account account = accountDAO.getByIban(iban)
+                    .orElseThrow(() -> new AccountNotFoundException("Account with iban " + iban + " not found"));
+
+            return account.getBalance();
+        } catch(AccountNotFoundException e){
+            System.err.printf("%s The account with iban=%s not found. \n%s", LocalDateTime.now(), iban, e);
+            throw e;
+        }
     }
 
     @Override
     public List<AccountReadOnlyDTO> getAccounts() {
-        return List.of();
+        return accountDAO.
+                getAccounts().stream().
+                map(Mapper::mapToReadOnlyDTO).collect(Collectors.toList());
     }
 }
